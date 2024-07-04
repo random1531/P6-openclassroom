@@ -1,0 +1,75 @@
+const addfilterkshtml = document.querySelector("#filer");
+const addworkshtml = document.querySelector("#portfolio .gallery");
+let filterselector = document.querySelectorAll("#filer");
+let work = null
+
+
+async function works() {
+    const initworks = await fetch("http://localhost:5678/api/works");
+    return await initworks.json();
+}
+works()
+
+/**init at load */
+async function addworks() {
+    const arrayworks = await works();
+
+    arrayworks.forEach(element => {
+        const figure = document.createElement("figure");
+        const img = document.createElement("img");
+        const figcaption = document.createElement("figcaption");
+        addworkshtml.appendChild(figure);
+        figure.appendChild(img);
+        figure.appendChild(figcaption);
+        img.src = element.imageUrl;
+        figcaption.textContent = element.title
+    });
+}
+addworks()
+
+async function categories() {
+    const initcategories = await fetch("http://localhost:5678/api/categories");
+    return await initcategories.json();
+
+}
+categories()
+//
+
+async function addcategories() {
+    const catarray = await categories();
+
+    catarray.forEach(element => {
+        const namefilter = document.createElement("button");
+        namefilter.textContent = element.name.toUpperCase();
+        addfilterkshtml.appendChild(namefilter);
+        namefilter.setAttribute("id", element.id);
+
+    });
+
+}
+addcategories()
+
+
+
+
+document.addEventListener("click", async function (e) {
+    const arrayfiltered = await works();
+    if (e.target.id !== "null") {
+        const arrayf = arrayfiltered.filter(element => element.categoryId == e.target.id);
+        addworkshtml.innerHTML = "";
+        arrayf.forEach(element => {
+            const figure = document.createElement("figure");
+            const img = document.createElement("img");
+            const figcaption = document.createElement("figcaption");
+            addworkshtml.appendChild(figure);
+            figure.appendChild(img);
+            figure.appendChild(figcaption);
+            img.src = element.imageUrl;
+            figcaption.textContent = element.title
+        });
+    } else {
+        addworkshtml.innerHTML = "";
+        addworks()
+    }
+
+})  
