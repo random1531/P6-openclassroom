@@ -16,9 +16,17 @@
 	background-color: rgba(203, 214, 220, 1);
 	cursor: pointer;
 }
+
+#btn_validate{
+
+}
 #forms_add_work{
 display: none;
 gap: 15px;
+}
+
+#messages{
+	color: green;
 }
 #imageUpload {
 	display: none;
