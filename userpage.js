@@ -43,8 +43,7 @@ async function addcateform() {
     catarray.forEach(element => {
         const formoption = document.createElement("option")
         formoption.textContent = element.name
-        formoption.setAttribute("id", element.id)
-        formoption.value = element.name
+        formoption.setAttribute("value", element.id)        
         document.querySelector('#cat').appendChild(formoption)
     })
 }
@@ -68,16 +67,26 @@ document.querySelector('.fa-pen-to-square').addEventListener("click", (e) => {
 
 document.querySelector('.fa-xmark').addEventListener("click", (e) => {
     modalactiv.style.display = 'none';
+    document.querySelector('#messages').innerHTML = ""
     addworkshtml.innerHTML = "";
     addworks()
+    document.querySelector('.displ').display = 'flex';
+    projecthide.style.display = 'flex'
+    document.querySelector('.modal__project').innerHTML = ""
+    picturemodal()
 })
 
 document.querySelector('#modal__block').addEventListener("click", (e) => {
 
     if (e.target.id === 'modal__block') {
         modalactiv.style.display = 'none';
+        document.querySelector('#messages').innerHTML = ""
         addworkshtml.innerHTML = "";
         addworks()
+        document.querySelector('.displ').display = 'flex';
+        projecthide.style.display = 'flex'
+        document.querySelector('.modal__project').innerHTML = ""
+        picturemodal()
     }
 })
 
@@ -128,7 +137,7 @@ document.addEventListener("click", async function (e) {
 
 });
 
-
+//preview image add
 document.getElementById('imageUpload').addEventListener('change', function (e) {
     const updateimg = document.querySelector("#preview_img")
     const file = e.target.files[0];
@@ -145,7 +154,7 @@ document.getElementById('imageUpload').addEventListener('change', function (e) {
     }
 });
 
-
+//add form
 document.querySelector("#btn_validate").addEventListener("click", async function (e) {
     e.preventDefault()
     if (e.target.id === "btn_validate") {
@@ -158,29 +167,35 @@ document.querySelector("#btn_validate").addEventListener("click", async function
                 e.preventDefault()
                 const titlework = document.querySelector('#titre1');
                 const catego = document.querySelector("#cat")
-                const selectedoption = catego.options[catego.selectedIndex];
-                const selecteid = selectedoption.id
+                // const selectedoption = catego.options[catego.selectedIndex];
+                // const selecteid = selectedoption.id               
                 const imgads = document.querySelector("#imageUpload")
                 const formData = new FormData();
                 formData.append('image', imgads.files[0]);
                 formData.append('title', titlework.value);
-                formData.append('category', selecteid)
+                formData.append('category', catego.value)
                 const addnewwork = await fetch('http://localhost:5678/api/works',
                     {
                         method: 'POST',
                         headers: {
                             'Authorization': 'Bearer' + " " + token
+                            // 'Content-Type': 'multipart/form-data'
                         },
                         body: formData,
+                        mode: 'cors'
+
                     }
                 )
                 if (addnewwork.status === 201) {
-                    document.querySelector('#messages').innerHTML = "Works ajoutés avec succes"                    
+                    document.querySelector('#messages').innerHTML = "Works ajoutés avec succes"  
+                   
                 } else {
-                    document.querySelector('#messages').innerHTML = "Une erreur est survenu"                    
+                    document.querySelector('#messages').innerHTML = "Une erreur est survenue"                    
                 }
+                const bla = await addnewwork.json()
+                console.log(bla)
+            
             }
-
         })
 
     }
