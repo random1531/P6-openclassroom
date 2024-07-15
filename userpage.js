@@ -1,7 +1,8 @@
-const addworkshtml = document.querySelector("#portfolio .gallery");
 const token = localStorage.getItem('tok')
-// const addpicture = document.querySelector('.formaddpicture')
-// const buttonadd = document.querySelector('#adds')
+if (!token) {    
+    window.location.href = 'login.html';
+}
+const addworkshtml = document.querySelector("#portfolio .gallery");
 const projecthide = document.querySelector(".modal__project")
 const modalactiv = document.querySelector('#modal__block');
 
@@ -17,7 +18,6 @@ async function categories() {
     return await initcategories.json();
 }
 categories()
-
 
 
 /**init at load  work*/
@@ -43,11 +43,12 @@ async function addcateform() {
     catarray.forEach(element => {
         const formoption = document.createElement("option")
         formoption.textContent = element.name
-        formoption.setAttribute("value", element.id)        
+        formoption.setAttribute("value", element.id)
         document.querySelector('#cat').appendChild(formoption)
     })
 }
 addcateform()
+// Function to check the form validity
 
 
 
@@ -56,15 +57,19 @@ document.querySelector('#adds').addEventListener("click", (e) => {
     projecthide.style.display = 'none'
     document.querySelector('#adds').style.display = 'none'
     document.querySelector('#forms_add_work').style.display = 'flex'
+     document.querySelector("#btn_validate").style.display ='flex'
+    
 
 })
-
+//
 document.querySelector('.fa-pen-to-square').addEventListener("click", (e) => {
     modalactiv.style.display = 'flex';
     document.querySelector('#forms_add_work').style.display = 'none'
     document.querySelector('#adds').style.display = 'flex'
+    document.querySelector("#btn_validate").style.display ='none'
 })
 
+//
 document.querySelector('.fa-xmark').addEventListener("click", (e) => {
     modalactiv.style.display = 'none';
     document.querySelector('#messages').innerHTML = ""
@@ -76,8 +81,8 @@ document.querySelector('.fa-xmark').addEventListener("click", (e) => {
     picturemodal()
 })
 
+//
 document.querySelector('#modal__block').addEventListener("click", (e) => {
-
     if (e.target.id === 'modal__block') {
         modalactiv.style.display = 'none';
         document.querySelector('#messages').innerHTML = ""
@@ -90,9 +95,23 @@ document.querySelector('#modal__block').addEventListener("click", (e) => {
     }
 })
 
+
+
+//
+document.querySelector('#back').addEventListener("click", (e) => {
+
+    if (e.target.id === 'back') {
+        document.querySelector('.displ').display = 'flex';
+        document.querySelector('#forms_add_work').style.display = 'none'
+        projecthide.style.display = 'flex'
+        document.querySelector('.modal__project').innerHTML = ""
+        document.querySelector('#adds').style.display = 'flex'
+         document.querySelector("#btn_validate").style.display ='none'
+        picturemodal()
+    }
+})
+
 //modal project picture import
-
-
 async function picturemodal() {
     const image = document.querySelector('.modal__project')
     const arrayworkss = await works();
@@ -152,51 +171,61 @@ document.getElementById('imageUpload').addEventListener('change', function (e) {
         }
         reader.readAsDataURL(file);
     }
+    
 });
+
+
+//Validation possible si champ titre est remplie
+const textinput = document.querySelector("#titre1")
+    const btnvalid = document.querySelector("#btn_validate")
+    textinput.addEventListener('input', () => {
+        if (textinput.value === "") {
+            btnvalid.disabled = true;
+            btnvalid.style.backgroundColor = 'grey';
+        } else {
+            btnvalid.disabled = false;
+            btnvalid.style.backgroundColor = 'green';
+        }
+    });
+
+
+
 
 //add form
 document.querySelector("#btn_validate").addEventListener("click", async function (e) {
-    e.preventDefault()
+    
+    
     if (e.target.id === "btn_validate") {
         e.preventDefault()
         const titlework = document.querySelector('#titre1');
         const catego = document.querySelector("#cat")
         const imgads = document.querySelector("#imageUpload")
-        document.querySelector("#btn_validate").addEventListener("click", async function (e) {
-            if (e.target.id === "btn_validate") {
-                e.preventDefault()
-                const titlework = document.querySelector('#titre1');
-                const catego = document.querySelector("#cat")
-                // const selectedoption = catego.options[catego.selectedIndex];
-                // const selecteid = selectedoption.id               
-                const imgads = document.querySelector("#imageUpload")
-                const formData = new FormData();
-                formData.append('image', imgads.files[0]);
-                formData.append('title', titlework.value);
-                formData.append('category', catego.value)
-                const addnewwork = await fetch('http://localhost:5678/api/works',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': 'Bearer' + " " + token
-                            // 'Content-Type': 'multipart/form-data'
-                        },
-                        body: formData,
-                        mode: 'cors'
+        const formData = new FormData();
+        formData.append('image', imgads.files[0]);
+        formData.append('title', titlework.value);
+        formData.append('category', catego.value)
+        const addnewwork = await fetch('http://localhost:5678/api/works',
+            {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer' + " " + token
+                },
+                body: formData,
+                mode: 'cors'
 
-                    }
-                )
-                if (addnewwork.status === 201) {
-                    document.querySelector('#messages').innerHTML = "Works ajoutés avec succes"  
-                   
-                } else {
-                    document.querySelector('#messages').innerHTML = "Une erreur est survenue"                    
-                }
-                const bla = await addnewwork.json()
-                console.log(bla)
-            
             }
-        })
+        )
+        if (addnewwork.status === 201) {
+            document.querySelector('#messages').innerHTML = "Works ajoutés avec succes"
+
+        } else {
+            document.querySelector('#messages').innerHTML = "Une erreur est survenue"
+        }
+        const bla = await addnewwork.json()
+        console.log(bla)
+
+
+
 
     }
 

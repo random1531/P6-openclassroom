@@ -21,7 +21,7 @@ async function login() {
     if (datalog.status === 200) {
         const data = await datalog.json()
         localStorage.setItem("tok", data.token)
-        location.href = "http://127.0.0.1:5500/userpage.html"
+        location.href = "http://127.0.0.1:5500/html/userpage.html"
 
     } else {
         document.querySelector('#errormessage').innerHTML = "Mauvais identifiant"
