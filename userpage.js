@@ -1,7 +1,9 @@
 const token = localStorage.getItem('tok')
+//Check if token empty back to login
 if (!token) {    
     window.location.href = 'login.html';
 }
+
 const addworkshtml = document.querySelector("#portfolio .gallery");
 const projecthide = document.querySelector(".modal__project")
 const modalactiv = document.querySelector('#modal__block');
@@ -48,42 +50,28 @@ async function addcateform() {
     })
 }
 addcateform()
-// Function to check the form validity
 
 
-
-///modal function
+///modal function to add work
 document.querySelector('#adds').addEventListener("click", (e) => {
     projecthide.style.display = 'none'
     document.querySelector('#adds').style.display = 'none'
     document.querySelector('#forms_add_work').style.display = 'flex'
-     document.querySelector("#btn_validate").style.display ='flex'
-    
-
+     document.querySelector("#btn_validate").style.display ='flex'   
+     document.querySelector("#back").style.display= 'flex'
 })
-//
+//enter in modal
 document.querySelector('.fa-pen-to-square').addEventListener("click", (e) => {
     modalactiv.style.display = 'flex';
     document.querySelector('#forms_add_work').style.display = 'none'
     document.querySelector('#adds').style.display = 'flex'
     document.querySelector("#btn_validate").style.display ='none'
+    document.querySelector("#back").style.display= 'none'
 })
 
-//
-document.querySelector('.fa-xmark').addEventListener("click", (e) => {
-    modalactiv.style.display = 'none';
-    document.querySelector('#messages').innerHTML = ""
-    addworkshtml.innerHTML = "";
-    addworks()
-    document.querySelector('.displ').display = 'flex';
-    projecthide.style.display = 'flex'
-    document.querySelector('.modal__project').innerHTML = ""
-    picturemodal()
-})
-
-//
+//leave modal 
 document.querySelector('#modal__block').addEventListener("click", (e) => {
-    if (e.target.id === 'modal__block') {
+    if (e.target.id === 'modal__block' || e.target.classList.contains('fa-xmark')) {
         modalactiv.style.display = 'none';
         document.querySelector('#messages').innerHTML = ""
         addworkshtml.innerHTML = "";
@@ -95,11 +83,8 @@ document.querySelector('#modal__block').addEventListener("click", (e) => {
     }
 })
 
-
-
-//
+//back to delete
 document.querySelector('#back').addEventListener("click", (e) => {
-
     if (e.target.id === 'back') {
         document.querySelector('.displ').display = 'flex';
         document.querySelector('#forms_add_work').style.display = 'none'
@@ -107,6 +92,7 @@ document.querySelector('#back').addEventListener("click", (e) => {
         document.querySelector('.modal__project').innerHTML = ""
         document.querySelector('#adds').style.display = 'flex'
          document.querySelector("#btn_validate").style.display ='none'
+         document.querySelector("#back").style.display= 'none'
         picturemodal()
     }
 })
@@ -174,7 +160,6 @@ document.getElementById('imageUpload').addEventListener('change', function (e) {
     
 });
 
-
 //Validation possible si champ titre est remplie
 const textinput = document.querySelector("#titre1")
     const btnvalid = document.querySelector("#btn_validate")
@@ -188,13 +173,8 @@ const textinput = document.querySelector("#titre1")
         }
     });
 
-
-
-
 //add form
-document.querySelector("#btn_validate").addEventListener("click", async function (e) {
-    
-    
+document.querySelector("#btn_validate").addEventListener("click", async function (e) {        
     if (e.target.id === "btn_validate") {
         e.preventDefault()
         const titlework = document.querySelector('#titre1');
@@ -212,7 +192,6 @@ document.querySelector("#btn_validate").addEventListener("click", async function
                 },
                 body: formData,
                 mode: 'cors'
-
             }
         )
         if (addnewwork.status === 201) {
@@ -220,14 +199,7 @@ document.querySelector("#btn_validate").addEventListener("click", async function
 
         } else {
             document.querySelector('#messages').innerHTML = "Une erreur est survenue"
-        }
-        const bla = await addnewwork.json()
-        console.log(bla)
-
-
-
-
+        }        
     }
-
 })
 
