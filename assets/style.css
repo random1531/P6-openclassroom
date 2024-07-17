@@ -17,6 +17,16 @@
 	cursor: pointer;
 }
 
+.activate{
+	background-color: #1d6154;
+	color: white;
+}
+
+.inactif{
+	background-color: white;
+	color: black;
+}
+
 #btn_validate {
 	height: 50px;
 	font-size: 1.2em;
@@ -562,17 +572,11 @@ li:hover {
 #filer button {
 	font-family: "Syne";
 	font-weight: 700;
-	color: black;
-	background-color: white;
+	
 	padding: 10px;
 	border: #1d6154 2px solid;
 	border-radius: 60px;
-	cursor: pointer;
-
-	&:hover {
-		background-color: #1d6154;
-		color: white;
-	}
+	cursor: pointer;	
 }
 
 .gallery {

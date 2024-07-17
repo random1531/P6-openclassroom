@@ -30,34 +30,30 @@ addworks()
 async function categories() {
     const initcategories = await fetch("http://localhost:5678/api/categories");
     return await initcategories.json();
-
 }
 categories()
 //
 
 async function addcategories() {
     const catarray = await categories();
-
     catarray.forEach(element => {
         const namefilter = document.createElement("button");
         namefilter.textContent = element.name.toUpperCase();
         addfilterkshtml.appendChild(namefilter);
         namefilter.setAttribute("id", element.id);
-
     });
-
 }
 addcategories()
 
 
 
-
+// fonction de filtre
 document.addEventListener("click", async function (e) {
     const arrayfiltered = await works();
-    if (e.target.id !== "null") {
+    if (e.target.id !== "null") {        
         const arrayf = arrayfiltered.filter(element => element.categoryId == e.target.id);
         addworkshtml.innerHTML = "";
-        arrayf.forEach(element => {
+        arrayf.forEach(element => {           
             const figure = document.createElement("figure");
             const img = document.createElement("img");
             const figcaption = document.createElement("figcaption");
@@ -73,3 +69,15 @@ document.addEventListener("click", async function (e) {
     }
 
 })  
+
+//changer filtre actif
+document.querySelector("#filer").addEventListener("click", (e) => {
+    if (e.target.id !== "filer") {
+        const btnfilterid = e.target.id;
+        const btnfilter = document.getElementById(btnfilterid);       
+        document.querySelectorAll("#filer button").forEach(button => {
+            button.classList.remove("activate");
+        });       
+        btnfilter.classList.add("activate");
+    }
+});
