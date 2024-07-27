@@ -10,6 +10,10 @@ async function works() {
 }
 works()
 
+document.querySelector("#login_page").addEventListener("click", (e) => {
+    window.location.href = "./html/login.html"
+})
+
 /**init at load */
 async function addworks() {
     const arrayworks = await works();
@@ -41,6 +45,7 @@ async function addcategories() {
         namefilter.textContent = element.name.toUpperCase();
         addfilterkshtml.appendChild(namefilter);
         namefilter.setAttribute("id", element.id);
+        namefilter.classList.add("inactif")
     });
 }
 addcategories()
@@ -50,10 +55,10 @@ addcategories()
 // fonction de filtre
 document.addEventListener("click", async function (e) {
     const arrayfiltered = await works();
-    if (e.target.id !== "null") {        
+    if (e.target.id !== "null") {
         const arrayf = arrayfiltered.filter(element => element.categoryId == e.target.id);
         addworkshtml.innerHTML = "";
-        arrayf.forEach(element => {           
+        arrayf.forEach(element => {
             const figure = document.createElement("figure");
             const img = document.createElement("img");
             const figcaption = document.createElement("figcaption");
@@ -68,16 +73,23 @@ document.addEventListener("click", async function (e) {
         addworks()
     }
 
-})  
+})
 
 //changer filtre actif
 document.querySelector("#filer").addEventListener("click", (e) => {
     if (e.target.id !== "filer") {
         const btnfilterid = e.target.id;
-        const btnfilter = document.getElementById(btnfilterid);       
+        const btnfilter = document.getElementById(btnfilterid);
         document.querySelectorAll("#filer button").forEach(button => {
-            button.classList.remove("activate");
-        });       
-        btnfilter.classList.add("activate");
+        button.classList.remove("activate"); 
+        button.classList.add("inactif"); 
+        });
+        btnfilter.classList.add("activate");     
+        btnfilter.classList.remove("inactif");       
+    }else{
+        document.querySelectorAll("#filer button").forEach(button => {
+            button.classList.remove("inactif");       
+            });
+               
     }
 });

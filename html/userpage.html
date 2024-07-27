@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
@@ -33,20 +32,20 @@
 						<label for="imageUpload" class="image-label">
 							<i class="fa-regular fa-image"></i>
 							<input type="file" id="imageUpload" name="+ Ajouter photo" accept="image/*">
-							<p class="btn">+ Ajouter photo</p>
+							<span class="btn">+ Ajouter photo</span>
 							<img id="preview_img" src="#" alt="Preview">
-							<div class="image-info">jpg, png : 4mo max</div>
+							<span class="image-info">jpg, png : 4mo max</span>
 						</label>
 					</div>
 					<label class="titre">Titre
 						<input type="text" id="titre1"></label>
 					<label class="cat">Catégorie
-						<select name="catégorie" id="cat">
-							<option value=""></option>
-							
+						<select name="catégorie" id="cat" title="Catégorie">
+							<option value="" label="Selectionner un élément"></option>
+
 						</select>
 					</label>
-					
+
 					<p id="messages"></p>
 				</form>
 			</div>
@@ -54,7 +53,7 @@
 				<!-- add element by js -->
 			</div>
 			<hr>
-			<button type="button"  class="btn validate" id="btn_validate" disabled>Valider</button>
+			<button type="button" class="btn validate" id="btn_validate" disabled>Valider</button>
 			<button class="add__picture" id="adds">Ajouter une photo</button>
 		</div>
 	</div>
@@ -66,7 +65,7 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li><a href="/index.html">logout</a></li>
+				<li id="logout">logout</li>
 				<li><img src="../assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -76,8 +75,9 @@
 	<main>
 
 
-		<section id="introduction">
+		<div id="introduction">
 			<figure>
+
 				<img src="../assets/images/sophie-bluel.png" alt="">
 			</figure>
 			<article>
@@ -90,19 +90,16 @@
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
 					décorateur(trice)</p>
 			</article>
-		</section>
+		</div>
 		<section id="portfolio">
 			<div class="project">
-				<h3 class="project__title">Mes Projets</h2>
-					<div class="pen_tomodyfi">
-						<i class="fa-regular fa-pen-to-square"></i>
-						<p>modifier</p>
-					</div>
-					
+				<h2 class="project__title">Mes Projets</h2>
+				<div class="pen_tomodyfi">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<p>modifier</p>
+				</div>
+
 			</div>
-
-			
-
 			<div class="gallery">
 
 			</div>
@@ -121,10 +118,6 @@
 			</form>
 		</section>
 	</main>
-
-
-	</div>
-
 	<footer>
 		<nav>
 			<ul>

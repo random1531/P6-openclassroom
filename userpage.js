@@ -4,6 +4,13 @@ if (!token) {
     window.location.href = 'login.html';
 }
 
+
+document.querySelector("#logout").addEventListener("click", (e) => {
+    localStorage.removeItem("tok")
+    window.location.href = "/index.html"
+})
+
+
 const addworkshtml = document.querySelector("#portfolio .gallery");
 const projecthide = document.querySelector(".modal__project")
 const modalactiv = document.querySelector('#modal__block');
@@ -44,7 +51,7 @@ async function addcateform() {
     const catarray = await categories();
     catarray.forEach(element => {
         const formoption = document.createElement("option")
-        formoption.textContent = element.name
+        formoption.setAttribute("label" ,element.name )          
         formoption.setAttribute("value", element.id)
         document.querySelector('#cat').appendChild(formoption)
     })
@@ -198,8 +205,7 @@ document.querySelector("#btn_validate").addEventListener("click", async function
             document.querySelector('#messages').innerHTML = "Works ajoutés avec succes"
             if (formreset) {
                 formreset.reset()
-            }
-
+            }            
             
             document.querySelector("#preview_img").style.display = 'none'
             document.querySelector(".fa-image").style.display = 'flex';
