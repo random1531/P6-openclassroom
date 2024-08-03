@@ -1,4 +1,10 @@
+//Variable
 const token = localStorage.getItem('tok')
+const addworkshtml = document.querySelector("#portfolio .gallery");
+const projecthide = document.querySelector(".modal__project")
+const modalactiv = document.querySelector('#modal__block');
+
+
 //Check if token empty back to login
 if (!token) {
     window.location.href = 'login.html';
@@ -11,9 +17,6 @@ document.querySelector("#logout").addEventListener("click", (e) => {
 })
 
 
-const addworkshtml = document.querySelector("#portfolio .gallery");
-const projecthide = document.querySelector(".modal__project")
-const modalactiv = document.querySelector('#modal__block');
 
 //fetch call 
 async function works() {
@@ -51,7 +54,7 @@ async function addcateform() {
     const catarray = await categories();
     catarray.forEach(element => {
         const formoption = document.createElement("option")
-        formoption.setAttribute("label" ,element.name )          
+        formoption.setAttribute("label", element.name)
         formoption.setAttribute("value", element.id)
         document.querySelector('#cat').appendChild(formoption)
     })
@@ -67,6 +70,8 @@ document.querySelector('#adds').addEventListener("click", (e) => {
     document.querySelector("#btn_validate").style.display = 'flex'
     document.querySelector("#back").style.display = 'flex'
 })
+
+
 //enter in modal
 document.querySelector('.fa-pen-to-square').addEventListener("click", (e) => {
     modalactiv.style.display = 'flex';
@@ -76,19 +81,24 @@ document.querySelector('.fa-pen-to-square').addEventListener("click", (e) => {
     document.querySelector("#back").style.display = 'none'
 })
 
-//leave modal 
+
 document.querySelector('#modal__block').addEventListener("click", (e) => {
     if (e.target.id === 'modal__block' || e.target.classList.contains('fa-xmark')) {
-        modalactiv.style.display = 'none';
-        document.querySelector('#messages').innerHTML = ""
-        addworkshtml.innerHTML = "";
-        addworks()
-        document.querySelector('.displ').display = 'flex';
-        projecthide.style.display = 'flex'
-        document.querySelector('.modal__project').innerHTML = ""
-        picturemodal()
+        exitmodal()
     }
+
 })
+
+function exitmodal() {
+
+    modalactiv.style.display = 'none';
+    addworkshtml.innerHTML = "";
+    addworks()
+    document.querySelector('.displ').display = 'flex';
+    projecthide.style.display = 'flex'
+    document.querySelector('.modal__project').innerHTML = ""
+    picturemodal()
+}
 
 //back to delete
 document.querySelector('#back').addEventListener("click", (e) => {
@@ -103,6 +113,7 @@ document.querySelector('#back').addEventListener("click", (e) => {
         picturemodal()
     }
 })
+
 
 //modal project picture import
 async function picturemodal() {
@@ -136,7 +147,7 @@ document.addEventListener("click", async function (e) {
             method: 'DELETE',
             headers: {
                 'accept': '*/*',
-                'Authorization': 'Bearer' + " " + token
+                'Authorization': 'Bearer ' + token
             }
         })
         if (deleted.status === 204) {
@@ -176,7 +187,7 @@ textinput.addEventListener('input', () => {
         btnvalid.style.backgroundColor = 'grey';
     } else {
         btnvalid.disabled = false;
-        btnvalid.style.backgroundColor = 'green';
+        btnvalid.style.backgroundColor = '#1D6154';
     }
 });
 
@@ -195,7 +206,7 @@ document.querySelector("#btn_validate").addEventListener("click", async function
             {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Bearer' + " " + token
+                    'Authorization': 'Bearer ' + token
                 },
                 body: formData,
                 mode: 'cors'
@@ -203,16 +214,14 @@ document.querySelector("#btn_validate").addEventListener("click", async function
         )
         if (addnewwork.status === 201) {
             document.querySelector('#messages').innerHTML = "Works ajoutés avec succes"
+            exitmodal()
             if (formreset) {
                 formreset.reset()
-            }            
-            
+            }
             document.querySelector("#preview_img").style.display = 'none'
             document.querySelector(".fa-image").style.display = 'flex';
             document.querySelector(".image-info").style.display = 'flex';
             document.querySelector(".btn").style.display = 'flex';
-                       
-           
 
         } else {
             document.querySelector('#messages').innerHTML = "Une erreur est survenue"

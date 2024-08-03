@@ -42,7 +42,7 @@ async function addcategories() {
     const catarray = await categories();
     catarray.forEach(element => {
         const namefilter = document.createElement("button");
-        namefilter.textContent = element.name.toUpperCase();
+        namefilter.textContent = element.name
         addfilterkshtml.appendChild(namefilter);
         namefilter.setAttribute("id", element.id);
         namefilter.classList.add("inactif")

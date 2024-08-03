@@ -1,8 +1,22 @@
 #preview_img {
 	width: 129px;
-	height: 100%;
+	height: 98%;
 	display: none;
 }
+
+#titre1 {
+	font-family: Work Sans;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16.42px;
+	text-align: left;
+	color: #444444;
+	padding-left: 15px;
+	border: none;
+	padding-right: 15px;
+	width: calc(100% - 30px);
+}
+
 .btn {
 	display: flex;
 	justify-content: center;
@@ -17,14 +31,24 @@
 	cursor: pointer;
 }
 
-.activate{
+.activate {
 	background-color: #1d6154;
 	color: white;
+	font-family: Syne;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 19.2px;
+	text-align: center;
 }
 
-.inactif{
+.inactif {
 	background-color: white;
-	color: black;
+	color: #1d6154;
+	font-family: Syne;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 19.2px;
+	text-align: center;
 }
 
 #btn_validate {
@@ -34,6 +58,7 @@
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	background-color: grey;
 	color: white;
+	width: 237px;
 }
 #forms_add_work {
 	display: none;
@@ -70,9 +95,12 @@
 
 .titre,
 .cat {
+	
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	gap: 5px;
+	
 }
 .titre input {
 	width: 100%;
@@ -81,6 +109,9 @@
 }
 
 .cat select {
+	border: none;
+	padding-left: 15px;
+	padding-right: 10px;
 	width: 100%;
 	height: 41px;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
@@ -134,7 +165,6 @@
 }
 
 .modal h2 {
-	
 	font-size: 26px;
 	font-weight: 400;
 	line-height: 30.5px;
@@ -299,7 +329,7 @@ hr {
 	display: flex;
 	align-items: start;
 	justify-content: flex-start;
-	
+	width: 100%;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16.42px;
@@ -308,7 +338,7 @@ hr {
 
 .loginmenus input {
 	width: 379px;
-	height: 51px;
+	height: 36px;
 	top: 338px;
 	left: 530px;
 	gap: 0px;
@@ -572,11 +602,11 @@ li:hover {
 #filer button {
 	font-family: "Syne";
 	font-weight: 700;
-	
+
 	padding: 10px;
 	border: #1d6154 2px solid;
 	border-radius: 60px;
-	cursor: pointer;	
+	cursor: pointer;
 }
 
 .gallery {

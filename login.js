@@ -1,3 +1,12 @@
+document.addEventListener("DOMContentLoaded", (e) => {
+    document.querySelector('#formlogin').addEventListener("submit", (e)=> {
+        e.preventDefault()
+        login()
+    })
+} )
+
+
+
 
 async function login() {
     const emailtext = document.querySelector('#email');
