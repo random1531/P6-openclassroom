@@ -10,7 +10,7 @@ if (!token) {
     window.location.href = 'login.html';
 }
 
-
+//disconect
 document.querySelector("#logout").addEventListener("click", (e) => {
     localStorage.removeItem("tok")
     window.location.href = "/index.html"
@@ -69,6 +69,7 @@ document.querySelector('#adds').addEventListener("click", (e) => {
     document.querySelector('#forms_add_work').style.display = 'flex'
     document.querySelector("#btn_validate").style.display = 'flex'
     document.querySelector("#back").style.display = 'flex'
+    document.querySelector("#title_modal").textContent = "Ajout photo"
 })
 
 
@@ -79,6 +80,7 @@ document.querySelector('.fa-pen-to-square').addEventListener("click", (e) => {
     document.querySelector('#adds').style.display = 'flex'
     document.querySelector("#btn_validate").style.display = 'none'
     document.querySelector("#back").style.display = 'none'
+    document.querySelector("#title_modal").textContent = "Galerie photo"
 })
 
 
@@ -86,11 +88,9 @@ document.querySelector('#modal__block').addEventListener("click", (e) => {
     if (e.target.id === 'modal__block' || e.target.classList.contains('fa-xmark')) {
         exitmodal()
     }
-
 })
 
 function exitmodal() {
-
     modalactiv.style.display = 'none';
     addworkshtml.innerHTML = "";
     addworks()
@@ -110,6 +110,7 @@ document.querySelector('#back').addEventListener("click", (e) => {
         document.querySelector('#adds').style.display = 'flex'
         document.querySelector("#btn_validate").style.display = 'none'
         document.querySelector("#back").style.display = 'none'
+        document.querySelector("#title_modal").textContent = "Galerie photo"
         picturemodal()
     }
 })

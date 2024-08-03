@@ -53,27 +53,29 @@ addcategories()
 
 
 // fonction de filtre
-document.addEventListener("click", async function (e) {
-    const arrayfiltered = await works();
-    if (e.target.id !== "null") {
-        const arrayf = arrayfiltered.filter(element => element.categoryId == e.target.id);
-        addworkshtml.innerHTML = "";
-        arrayf.forEach(element => {
-            const figure = document.createElement("figure");
-            const img = document.createElement("img");
-            const figcaption = document.createElement("figcaption");
-            addworkshtml.appendChild(figure);
-            figure.appendChild(img);
-            figure.appendChild(figcaption);
-            img.src = element.imageUrl;
-            figcaption.textContent = element.title
-        });
-    } else {
-        addworkshtml.innerHTML = "";
-        addworks()
+document.addEventListener("click", async function (e) {    
+    if (e.target.closest("#filer button")) {
+        const arrayfiltered = await works();
+        if (e.target.id !== "null") {
+            const arrayf = arrayfiltered.filter(element => element.categoryId == e.target.id);
+            addworkshtml.innerHTML = "";
+            arrayf.forEach(element => {
+                const figure = document.createElement("figure");
+                const img = document.createElement("img");
+                const figcaption = document.createElement("figcaption");
+                addworkshtml.appendChild(figure);
+                figure.appendChild(img);
+                figure.appendChild(figcaption);
+                img.src = element.imageUrl;
+                figcaption.textContent = element.title;
+            });
+        } else {
+            addworkshtml.innerHTML = "";
+            addworks();
+        }
     }
+});
 
-})
 
 //changer filtre actif
 document.querySelector("#filer").addEventListener("click", (e) => {
