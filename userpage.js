@@ -74,22 +74,23 @@ document.querySelector('#adds').addEventListener("click", (e) => {
 
 
 //enter in modal
-document.querySelector('.fa-pen-to-square').addEventListener("click", (e) => {
-    modalactiv.style.display = 'flex';
-    document.querySelector('#forms_add_work').style.display = 'none'
-    document.querySelector('#adds').style.display = 'flex'
-    document.querySelector("#btn_validate").style.display = 'none'
-    document.querySelector("#back").style.display = 'none'
-    document.querySelector("#title_modal").textContent = "Galerie photo"
-})
+document.querySelectorAll('.fa-pen-to-square').forEach((icon) => {
+    icon.addEventListener("click", () => {
+        modalactiv.style.display = 'flex';
+        document.querySelector('#forms_add_work').style.display = 'none';
+        document.querySelector('#adds').style.display = 'flex';
+        document.querySelector("#btn_validate").style.display = 'none';
+        document.querySelector("#back").style.display = 'none';
+        document.querySelector("#title_modal").textContent = "Galerie photo";
+    });
+});
 
-
+//exit modal
 document.querySelector('#modal__block').addEventListener("click", (e) => {
     if (e.target.id === 'modal__block' || e.target.classList.contains('fa-xmark')) {
         exitmodal()
     }
 })
-
 function exitmodal() {
     modalactiv.style.display = 'none';
     addworkshtml.innerHTML = "";
@@ -176,7 +177,6 @@ document.getElementById('imageUpload').addEventListener('change', function (e) {
         }
         reader.readAsDataURL(file);
     }
-
 });
 
 //Validation possible si champ titre est remplie
