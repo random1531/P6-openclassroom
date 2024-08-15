@@ -173,7 +173,6 @@ figure figcaption {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 12px;
-	justify-content: space-between;
 	margin-bottom: 50px;
 	margin-top: 50px;
 }
@@ -292,6 +291,8 @@ figure figcaption {
 
 #messages {
 	color: green;
+	text-align: center;
+	font-size: 22px;
 }
 
 
