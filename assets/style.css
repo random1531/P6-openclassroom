@@ -97,7 +97,7 @@ figure figcaption {
 }
 
 /*edit mode*/
-.editionmod {
+#editionmod {
 	top: 0;
 	left: 0;
 	background-color: black;
@@ -406,7 +406,7 @@ hr {
 	color: rgba(29, 97, 84, 1);
 }
 
-.pen_tomodyfi {
+#pen_tomodyfi {
 	display: flex;
 	align-items: center;
 	gap: 15px;
