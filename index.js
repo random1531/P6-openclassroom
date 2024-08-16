@@ -65,6 +65,8 @@ document.addEventListener("click", async function (e) {
     if (e.target.closest("#filer button")) {
         const arrayfiltered = await works();
         if (e.target.id !== "null") {
+            e.target.classList.add("activate"); 
+            e.target.classList.remove("inactif");
             const arrayf = arrayfiltered.filter(element => element.categoryId == e.target.id);
             addworkshtml.innerHTML = "";
             arrayf.forEach(element => {
@@ -78,21 +80,24 @@ document.addEventListener("click", async function (e) {
                 figcaption.textContent = element.title;
             });
         } else {
+            
             addworkshtml.innerHTML = "";
             addworks();
         }
+        
+
     }
 });
 
 
-//changer filtre actif
+// changer filtre actif
 document.querySelector("#filer").addEventListener("click", (e) => {
     if (e.target.id !== "filer") {
         const btnfilterid = e.target.id;
         const btnfilter = document.getElementById(btnfilterid);
         document.querySelectorAll("#filer button").forEach(button => {
         button.classList.remove("activate"); 
-        button.classList.add("inactif"); 
+        button.classList.add("inactif");               
         });
         btnfilter.classList.add("activate");     
         btnfilter.classList.remove("inactif");       
@@ -291,10 +296,12 @@ function accueil(){
     const editheader = document.querySelector('#editionmod')
     const editpen = document.querySelector('#pen_tomodyfi')
     const login = document.querySelector('#login_page')
+    const filter = document.querySelector('#filer')   
     if (localStorage.getItem('tok') === null) {
         editheader.style.display = 'none'
         editpen.style.display = 'none'
         login.textContent = "login"
+        filter.style.display = 'true'
     }
 }
 accueil()
