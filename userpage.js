@@ -82,6 +82,7 @@ document.querySelectorAll('.fa-pen-to-square').forEach((icon) => {
         document.querySelector("#btn_validate").style.display = 'none';
         document.querySelector("#back").style.display = 'none';
         document.querySelector("#title_modal").textContent = "Galerie photo";
+        document.querySelector('#messageserror').textContent  = '';
     });
 });
 
@@ -225,7 +226,7 @@ document.querySelector("#btn_validate").addEventListener("click", async function
             document.querySelector(".btn").style.display = 'flex';
 
         } else {
-            document.querySelector('#messages').innerHTML = "Une erreur est survenue"
+            document.querySelector('#messageserror').innerHTML = "Une erreur est survenue"
         }
     }
 })

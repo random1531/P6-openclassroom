@@ -10,6 +10,7 @@ async function works() {
 }
 works()
 
+
 document.querySelector("#login_page").addEventListener("click", (e) => {
     window.location.href = "./html/login.html"
 })
@@ -17,7 +18,6 @@ document.querySelector("#login_page").addEventListener("click", (e) => {
 /**init at load */
 async function addworks() {
     const arrayworks = await works();
-
     arrayworks.forEach(element => {
         const figure = document.createElement("figure");
         const img = document.createElement("img");
@@ -31,13 +31,15 @@ async function addworks() {
 }
 addworks()
 
+
+//Récupération des catégories 
 async function categories() {
     const initcategories = await fetch("http://localhost:5678/api/categories");
     return await initcategories.json();
 }
 categories()
-//
 
+//A joute des catégories filtre ainsi que leur id
 async function addcategories() {
     const catarray = await categories();
     catarray.forEach(element => {

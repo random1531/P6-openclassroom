@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
 } )
 
 
-
-
 async function login() {
     const emailtext = document.querySelector('#email');
     const passwordtext = document.querySelector('#password');
@@ -35,7 +33,4 @@ async function login() {
     } else {
         document.querySelector('#errormessage').innerHTML = "Mauvais identifiant"
     }
-
-
-
 } 
